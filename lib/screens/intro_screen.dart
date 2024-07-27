@@ -39,12 +39,22 @@ class IntroScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
             //button
-            MyButton(
-              onTap: () => Navigator.pushNamed(context, 'shop_screen'),
-              child: const Icon(
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, 'shop_screen'),
+              child: Icon(
                 Icons.arrow_forward,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ),
+
+            /*
+            MyButton(
+              onTap: () => Navigator.pushNamed(context, 'shop_screen'),
+              child: const Icon(Icons.arrow_forward, color: Colors.red
+                  // Theme.of(context).colorScheme.secondary,
+                  ),
+            ),
+            */
           ],
         ),
       ),

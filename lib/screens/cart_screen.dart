@@ -40,6 +40,22 @@ class CartScreen extends StatelessWidget {
     );
   }
 
+  // user pressed pay button
+
+  void payButtonPressed(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => const AlertDialog(
+        title: Padding(
+          padding: EdgeInsets.all(25.0),
+          child: Text(
+            'User wants to pay',
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     //get access to the cart
@@ -58,30 +74,57 @@ class CartScreen extends StatelessWidget {
         children: [
           // cart list
           Expanded(
-            child: ListView.builder(
-              itemCount: cart.length,
-              itemBuilder: (context, index) {
-                //get individual items in the cart
-                final item = cart[index];
-
-                //return it as cart tile UI
-
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(
-                    item.price,
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.remove,
+            child: cart.isEmpty
+                ? const Center(
+                    child: Text(
+                      'There is no items yet!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    onPressed: () => removeItemFromCart(context, item),
+                  )
+                : ListView.builder(
+                    itemCount: cart.length,
+                    itemBuilder: (context, index) {
+                      //get individual items in the cart
+                      final item = cart[index];
+
+                      //return it as cart tile UI
+
+                      return ListTile(
+                        title: Text(item.name),
+                        subtitle: Text(
+                          item.price,
+                        ),
+                        trailing: IconButton(
+                          icon: const Icon(
+                            Icons.remove,
+                          ),
+                          onPressed: () => removeItemFromCart(context, item),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+          ),
+
+          // pay button
+          //  Padding(
+          //  padding: const EdgeInsets.all(50),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 30,
+              bottom: 30,
+            ),
+            child: ElevatedButton(
+              onPressed: () => payButtonPressed(context),
+              child: const Text(
+                'Pay now',
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
             ),
           ),
-          // pay button
+          // ),
         ],
       ),
     );
