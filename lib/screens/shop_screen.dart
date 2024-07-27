@@ -14,6 +14,17 @@ class ShopScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, 'cart_screen');
+            },
+            icon: Icon(
+              Icons.shopping_cart_outlined,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+          ),
+        ],
         centerTitle: true,
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
